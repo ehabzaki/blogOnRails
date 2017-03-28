@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @article.title %>
+</p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @article.body %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @article.user.email %>
+</p>
+<h1>View comments</h1>
+<table>
+<thead>
+<tr>
+<th>body</th>
+<th>user</th>
+</tr>
+
+</thead>
+
+<tbody>
+
+  <%@article.comments.each do |comment| %>
+  <tr>
+  <td><%=comment.body%></td>
+  </tr>
+<% end %>
+
+</tbody>
+
+</table>
+<h1>add comment</h1>
+
+<%= form_for([@article,@article.comments.build]) do |f| %>
+
+  <div class="field">
+    <%= f.label :body %>
+    <%=f.text_area :body %>
+  </div>
+
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<%= link_to 'Edit', edit_article_path(@article) %> |
+<%= link_to 'Back', articles_path %>
